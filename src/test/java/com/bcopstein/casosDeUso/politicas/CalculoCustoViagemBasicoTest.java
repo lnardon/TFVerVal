@@ -42,31 +42,30 @@ public class CalculoCustoViagemBasicoTest {
     public void custoViagemTest() {
         Roteiro roteiro = mock(Roteiro.class);
         Collection<Bairro> bairrosPercorridos = new ArrayList<Bairro>();
-        bairrosPercorridos.add(blocks.get(6));
         bairrosPercorridos.add(blocks.get(5));
-        bairrosPercorridos.add(blocks.get(3));
+        bairrosPercorridos.add(blocks.get(4));
+        bairrosPercorridos.add(blocks.get(2));
 
         when(roteiro.bairrosPercoridos()).thenReturn(bairrosPercorridos);
         calc.defineRoteiro(roteiro);
 
-        assertEquals(80.0, calc.custoViagem()); // CHECAR O VALOR RETORNADO AQUI E CORRIGIR
+        assertEquals(30.0, calc.custoViagem());
     }
 
-    // TESTE AQUI LEIFHEIT
     @Test
     public void calculaCustoBasicoTest() {
         Roteiro roteiro = mock(Roteiro.class);
         Collection<Bairro> bairrosPercorridos = new ArrayList<Bairro>();
-        bairrosPercorridos.add(blocks.get(6));
         bairrosPercorridos.add(blocks.get(5));
-        bairrosPercorridos.add(blocks.get(1));
+        bairrosPercorridos.add(blocks.get(4));
+        bairrosPercorridos.add(blocks.get(0));
 
         when(roteiro.bairrosPercoridos()).thenReturn(bairrosPercorridos);
 
         calc.defineRoteiro(roteiro);
 
         assertEquals(roteiro, calc.getRoteiro());
-        assertEquals(80.0, calc.calculoCustoBasico()); // CHECAR O VALOR RETORNADO AQUI E CORRIGIR
+        assertEquals(30.0, calc.calculoCustoBasico());
     }
 
     @Test

@@ -14,6 +14,7 @@ import com.bcopstein.entidades.geometria.Ponto;
 import com.bcopstein.casosDeUso.Politicas.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -60,22 +61,20 @@ public class CalculoCustoViagemRelampagoTest {
         assertEquals(expected, ccv.descontoPontuacao()); // CHECAR O VALOR RETORNADO AQUI E CORRIGIR
     }
 
-    // TESTE AQUI LEIFHEIT
     @ParameterizedTest
-    @CsvSource({ "0,3,4.0", "1,1,0.0", "1,4,0.0" }) // MUDAR?
+    @CsvSource({ "0,3,4.0", "1,1,0.0", "1,4,0.0" })
     public void descontoPromocaoSazonalTestCaso1() {
-        bairrosPercorridos.add(bairros.get(6));
         bairrosPercorridos.add(bairros.get(5));
+        bairrosPercorridos.add(bairros.get(4));
         bairrosPercorridos.add(bairros.get(3));
         bairrosPercorridos.add(bairros.get(2));
 
         when(roteiro.bairrosPercoridos()).thenReturn(bairrosPercorridos);
         ccv.defineRoteiro(roteiro);
 
-        assertEquals(4.0, ccv.descontoPromocaoSazonal()); // CHECAR O VALOR RETORNADO AQUI E CORRIGIR
+        assertEquals(2.0, ccv.descontoPromocaoSazonal());
     }
 
-    // TESTE AQUI LEIFHEIT
     public void descontoPromocaoSazonalTestCaso2() {
         bairrosPercorridos.add(bairros.get(6));
 
@@ -85,13 +84,13 @@ public class CalculoCustoViagemRelampagoTest {
         assertEquals(0.0, ccv.descontoPromocaoSazonal()); // CHECAR O VALOR RETORNADO AQUI E CORRIGIR
     }
 
-    // TESTE AQUI LEIFHEIT
+    @Test
     public void descontoPromocaoSazonalTestCaso3() {
-        bairrosPercorridos.add(bairros.get(6));
         bairrosPercorridos.add(bairros.get(5));
-        bairrosPercorridos.add(bairros.get(3));
+        bairrosPercorridos.add(bairros.get(4));
         bairrosPercorridos.add(bairros.get(2));
+        bairrosPercorridos.add(bairros.get(1));
 
-        assertEquals(0.0, ccv.descontoPromocaoSazonal()); // CHECAR O VALOR RETORNADO AQUI E CORRIGIR
+        assertEquals(0.0, ccv.descontoPromocaoSazonal());
     }
 }
