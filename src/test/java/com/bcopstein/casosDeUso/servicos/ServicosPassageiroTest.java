@@ -21,24 +21,24 @@ public class ServicosPassageiroTest {
     Passageiro passageiro;
     Roteiro roteiro;
     Viagem viagem;
-    RepositorioBairros repoBairros;
-    RepositorioPassageiros repoPassageiros;
-    ServicosPassageiro servicoPassageiro;
+    RepositorioBairros repBairros;
+    RepositorioPassageiros repPassageiros;
+    ServicosPassageiro servPassageiros;
     CalculoCustoViagem ccv;
 
     @BeforeEach
     public void setup() {
-        repoBairros = new RepositorioBairrosImplMem();
-        repoPassageiros = new RepositorioPassageirosImplMem();
-        servicoPassageiro = new ServicosPassageiro(repoBairros, repoPassageiros, ccv);
+        repBairros = new RepositorioBairrosImplMem();
+        repPassageiros = new RepositorioPassageirosImplMem();
+        servPassageiros = new ServicosPassageiro(repBairros, repPassageiros, ccv);
 
         roteiro = mock(Roteiro.class);
     }
 
     @Test
     public void createNewServiceTest() {
-      assertTrue(servicoPassageiro.getListaBairros() != null);
-      assertTrue(servicoPassageiro.getPassageirosCadastrados() != null);
+      assertTrue(servPassageiros.getListaBairros() != null);
+      assertTrue(servPassageiros.getPassageirosCadastrados() != null);
     }
 
 }

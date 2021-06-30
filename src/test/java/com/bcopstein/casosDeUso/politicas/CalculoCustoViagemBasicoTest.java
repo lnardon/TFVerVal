@@ -25,50 +25,64 @@ public class CalculoCustoViagemBasicoTest {
     @BeforeEach
     public void setup() {
         ccv = new CalculoCustoViagemBasico();
-
         bairros = new ArrayList<>();
 
-        bairros.add(Bairro.novoBairroRetangular("Bom Fim", new Ponto(10,40), 20, 10, 10.0));
-        bairros.add(Bairro.novoBairroRetangular("Independencia", new Ponto(30,40), 20, 10, 20.0));
-        bairros.add(Bairro.novoBairroRetangular("Moinhos de Vento", new Ponto(20,30), 20, 10, 30.0));
-        bairros.add(Bairro.novoBairroRetangular("Auxiliadora", new Ponto(40,30), 20, 10, 20.0));
-        bairros.add(Bairro.novoBairroRetangular("Boa Vista", new Ponto(40,20), 20, 10, 20.0));
+        bairros.add(Bairro.novoBairroRetangular("Glória", new Ponto(20,20), 40, 20, 10.0));
+        bairros.add(Bairro.novoBairroRetangular("Lomba do Pinheiro", new Ponto(20,40), 40, 20, 10.0));
+        bairros.add(Bairro.novoBairroRetangular("Belém Novo", new Ponto(40,20), 40, 20, 10.0));
+        bairros.add(Bairro.novoBairroRetangular("Rubem Berta", new Ponto(40,30), 40, 20, 10.0));
+        bairros.add(Bairro.novoBairroRetangular("Vila Ipiranga", new Ponto(40,20), 40, 20, 10.0));
+        bairros.add(Bairro.novoBairroRetangular("Jardim Europa", new Ponto(30,40), 40, 20, 10.0));
 
         roteiro = new Roteiro(bairros.get(0), bairros.get(3), bairros);
-
         ccv.defineRoteiro(roteiro);
     }
 
+    // TESTE AQUI LEIFHEIT
     @Test
-    public void defineRoteiroTest() {
-        
+    public void escolheRoteiroTest() {        
         assertEquals(roteiro, ccv.getRoteiro());
     }
 
+    // TESTE AQUI LEIFHEIT
     @Test
-    public void definePassageiroTest() {
-        Passageiro passageiro = Passageiro.novoPassageiro("12345678910", "Adalberto");
-
+    public void escolhePassageiroTest() {
+        Passageiro passageiro = Passageiro.passageiroExistente("7474747", "Lucas");
         ccv.definePassageiro(passageiro);
+
         assertEquals(passageiro, ccv.getPassageiro());
     }
-    
-    @Test
-    public void calculaCustoBasicoTest() {
 
+    // TESTE AQUI LEIFHEIT
+    @Test
+    public void custoViagemTest() {
         Roteiro roteiro = mock(Roteiro.class);
         Collection<Bairro> bairrosPercorridos = new ArrayList<Bairro>();
-        bairrosPercorridos.add(bairros.get(0));
-        bairrosPercorridos.add(bairros.get(1));
-        bairrosPercorridos.add(bairros.get(2));
+        bairrosPercorridos.add(bairros.get(6));
+        bairrosPercorridos.add(bairros.get(5));
         bairrosPercorridos.add(bairros.get(3));
+
+        when(roteiro.bairrosPercoridos()).thenReturn(bairrosPercorridos);
+        ccv.defineRoteiro(roteiro);
+
+        assertEquals(80.0, ccv.custoViagem()); //CHECAR O VALOR RETORNADO AQUI E CORRIGIR
+    }
+    
+    // TESTE AQUI LEIFHEIT
+    @Test
+    public void calculaCustoBasicoTest() {
+        Roteiro roteiro = mock(Roteiro.class);
+        Collection<Bairro> bairrosPercorridos = new ArrayList<Bairro>();
+        bairrosPercorridos.add(bairros.get(6));
+        bairrosPercorridos.add(bairros.get(5));
+        bairrosPercorridos.add(bairros.get(1));
 
         when(roteiro.bairrosPercoridos()).thenReturn(bairrosPercorridos);
         
         ccv.defineRoteiro(roteiro);
 
         assertEquals(roteiro, ccv.getRoteiro());
-        assertEquals(80.0, ccv.calculoCustoBasico());
+        assertEquals(80.0, ccv.calculoCustoBasico()); //CHECAR O VALOR RETORNADO AQUI E CORRIGIR
     }
 
     @Test
@@ -77,22 +91,7 @@ public class CalculoCustoViagemBasicoTest {
     }
 
     @Test
-    public void descontoPromocaoSazonal() {
+    public void descontoPromocaoSazonalTest() {
         assertEquals(0.0, ccv.descontoPromocaoSazonal());
-    }
-
-    @Test
-    public void custoViagemTest() {
-        Roteiro roteiro = mock(Roteiro.class);
-        Collection<Bairro> bairrosPercorridos = new ArrayList<Bairro>();
-        bairrosPercorridos.add(bairros.get(0));
-        bairrosPercorridos.add(bairros.get(1));
-        bairrosPercorridos.add(bairros.get(2));
-        bairrosPercorridos.add(bairros.get(3));
-
-        when(roteiro.bairrosPercoridos()).thenReturn(bairrosPercorridos);
-        ccv.defineRoteiro(roteiro);
-
-        assertEquals(80.0, ccv.custoViagem());
     }
 }

@@ -8,15 +8,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CustoViagemTest {
-    
+public class CalculaCustoViagemTest {
+    // TESTE AQUI LEIFHEIT
     @Test
-    public void custoViagemTest() {
+    public void calculaCustoViagemTest() {
         CalculoCustoViagem ccv = mock(CalculoCustoViagemBasico.class);
-        when(ccv.custoViagem()).thenReturn(35.0);
-        double rEsp = 35.0;
+        when(ccv.custoViagem()).thenReturn(50.0);
+        double respEsperada = 60.0;
         CustoViagem cv = new CustoViagem(ccv);
-        double rObs = cv.custoViagem(null, null);
-        assertEquals(rEsp, rObs,0.0001);
+        double respObtida = cv.custoViagem(null, null);
+        assertEquals(respEsperada, respObtida,0.0001);
     }
 }
