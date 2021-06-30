@@ -3,7 +3,7 @@ package com.bcopstein.entidades.geometria;
 public class Area {
     private Ponto pSupEsq, pInfDir;
 
-    public Area constructor(Ponto pSupEsq, Ponto pInfDir) {
+    public Area(Ponto pSupEsq, Ponto pInfDir) {
         if ((pSupEsq.getX() >= pInfDir.getX()) || (pSupEsq.getY() <= pInfDir.getY())) {
             throw new IllegalArgumentException("O retangulo deve ser definido pela diagonal principal");
         } else {
@@ -20,10 +20,10 @@ public class Area {
         return pInfDir;
     }
 
-    public Ponto pontoCentral(){
-        int x = getPSupEsq().getX()+(Math.abs(getPInfDir().getX() - getPSupEsq().getX())/2);
-        int y = getPInfDir().getY()+(Math.abs(getPInfDir().getY() - getPSupEsq().getY())/2);
-        return new Ponto(x,y);
+    public Ponto pontoCentral() {
+        int x = getPSupEsq().getX() + (Math.abs(getPInfDir().getX() - getPSupEsq().getX()) / 2);
+        int y = getPInfDir().getY() + (Math.abs(getPInfDir().getY() - getPSupEsq().getY()) / 2);
+        return new Ponto(x, y);
     }
 
     public byte codificaPonto(Ponto p) {
@@ -64,12 +64,11 @@ public class Area {
     }
 
     @Override
-    public boolean equals(Object outro){
-        if (outro instanceof Area){
-            Area outra = (Area)outro;
-            return ((pSupEsq.equals(outra.pSupEsq)) && 
-                    (pInfDir.equals(outra.pInfDir)));
-        }else{
+    public boolean equals(Object outro) {
+        if (outro instanceof Area) {
+            Area outra = (Area) outro;
+            return ((pSupEsq.equals(outra.pSupEsq)) && (pInfDir.equals(outra.pInfDir)));
+        } else {
             return false;
         }
     }
