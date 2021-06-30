@@ -10,6 +10,9 @@
         <java.version>15</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <sonar.projectKey>lnardon_TFVerVal</sonar.projectKey>
+        <sonar.organization>lnardon</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
